@@ -1,5 +1,6 @@
 
 from scanner import scan_project
+from question_generator import generate_question
 
 
 def main():
@@ -16,31 +17,56 @@ def main():
 
         result = scan_project(project_path)
 
-        print("\n===== SCAN COMPLETE =====")
+        functions = result["functions"]
 
+        print("\n===== SCAN COMPLETE =====")
         print(f"Project: {result['project']}")
         print(f"Files scanned: {result['total_files']}")
         print(f"Functions found: {result['total_functions']}")
 
-        print("\n===== FUNCTIONS DISCOVERED =====")
+        if not functions:
+            print("\nNo Python functions found.")
+            return
 
-        for function in result["functions"]:
+        print("\n===== SELECT A FUNCTION =====")
+
+        for index, function in enumerate(functions, start=1):
             print(
-                f"\n{function['qualified_name']}"
-                f" | File: {function['file']}"
-                f" | Line: {function['line']}"
+                f"{index}. {function['qualified_name']} "
+                f"({function['file']})"
             )
 
-        print("\n===== IMPORTS DISCOVERED =====")
+        selection = int(
+            input("\nChoose a function number: ")
+        )
 
-        for imported in result["imports"]:
-            print(imported)
+        if selection < 1 or selection > len(functions):
+            print("Invalid selection.")
+            return
 
-        if result["errors"]:
-            print("\nSome files could not be analyzed:")
+        selected_function = functions[selection - 1]
 
-            for error in result["errors"]:
-                print(error["file"], error["error"])
+        print("\nAnalyzing function...")
+        question_data = generate_question(selected_function)
+
+        print("\n===== LEGITX CHALLENGE =====")
+
+        print(f"\nFunction: {selected_function['qualified_name']}")
+        print(f"Difficulty: {question_data['difficulty']}")
+        print(f"Question type: {question_data['question_type']}")
+
+        print("\nQUESTION:")
+        print(question_data["question"])
+
+        print(
+            f"\nLegitX generated "
+            f"{len(question_data['expected_points'])} grading criteria."
+        )
+
+        print("\nThe answer rubric is saved for the next stage.")
+
+    except ValueError as error:
+        print(f"\nInput or validation error: {error}")
 
     except Exception as error:
         print(f"\nLegitX encountered an error: {error}")
