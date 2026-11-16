@@ -66,8 +66,10 @@ class CodeAnalyzer(ast.NodeVisitor):
                 arg.arg for arg in node.args.args
             ],
             "docstring": ast.get_docstring(node) or "",
+            "source_code": ast.get_source_segment(self.source, node) or "",
             "calls": [],
             "returns_value": False
+            
         }
 
         self.functions.append(function_info)
