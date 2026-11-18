@@ -1,6 +1,7 @@
 
 from scanner import scan_project
 from question_generator import generate_question
+from evaluator import evaluate_answer
 
 
 def main():
@@ -46,11 +47,11 @@ def main():
 
         selected_function = functions[selection - 1]
 
-        print("\nAnalyzing function...")
+        print("\nGenerating your challenge...")
+
         question_data = generate_question(selected_function)
 
         print("\n===== LEGITX CHALLENGE =====")
-
         print(f"\nFunction: {selected_function['qualified_name']}")
         print(f"Difficulty: {question_data['difficulty']}")
         print(f"Question type: {question_data['question_type']}")
@@ -58,12 +59,55 @@ def main():
         print("\nQUESTION:")
         print(question_data["question"])
 
-        print(
-            f"\nLegitX generated "
-            f"{len(question_data['expected_points'])} grading criteria."
+        print("\nTake your time. Explain the function in your own words.")
+
+        user_answer = input("\nYour explanation: ").strip()
+
+        print("\nEvaluating your understanding...")
+
+        evaluation = evaluate_answer(
+            selected_function,
+            question_data,
+            user_answer
         )
 
-        print("\nThe answer rubric is saved for the next stage.")
+        print("\n===== LEGITX EVALUATION =====")
+
+        print(
+            f"\nUnderstanding score: "
+            f"{evaluation['percentage']}%"
+        )
+
+        print(
+            f"Points: {evaluation['total_score']} / "
+            f"{evaluation['maximum_score']}"
+        )
+
+        print("\n===== CRITERION BREAKDOWN =====")
+
+        for index, item in enumerate(
+            evaluation["criterion_results"], start=1
+        ):
+            print(f"\n{index}. {item['criterion']}")
+            print(f"Score: {item['score']} / 2")
+            print(f"Feedback: {item['feedback']}")
+            print(f"Evidence: {item['evidence']}")
+
+        print("\n===== YOUR STRENGTHS =====")
+
+        for strength in evaluation.get("strengths", []):
+            print(f"- {strength}")
+
+        print("\n===== KNOWLEDGE GAPS =====")
+
+        for gap in evaluation.get("knowledge_gaps", []):
+            print(f"- {gap}")
+
+        print("\n===== OVERALL FEEDBACK =====")
+        print(evaluation.get("overall_feedback", ""))
+
+        print("\n===== SUGGESTED ANSWER =====")
+        print(evaluation.get("suggested_answer", ""))
 
     except ValueError as error:
         print(f"\nInput or validation error: {error}")

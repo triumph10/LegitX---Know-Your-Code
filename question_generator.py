@@ -107,8 +107,12 @@ Return ONLY a valid JSON object with these keys:
     if start == -1 or end == -1:
         raise ValueError("AI did not return valid JSON.")
 
-    result = json.loads(content[start:end + 1])
+    print("\n===== RAW AI RESPONSE =====")
+    print(content)
 
+    print("\n===== END OF AI RESPONSE =====")
+
+    result = json.loads(content[start:end + 1])
     required_fields = [
         "question",
         "difficulty",
