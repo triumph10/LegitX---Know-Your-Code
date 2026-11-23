@@ -75,23 +75,26 @@ Each criterion score must be 0, 1, or 2.
 """
 
     response = client.chat.completions.create(
-        model=MODEL,
-        messages=[
-            {
-                "role": "system",
-                "content": (
-                    "You are a precise programming evaluator. "
-                    "Return valid JSON only. Never invent code behaviour."
-                )
-            },
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        temperature=0.1,
-        max_completion_tokens=1500
-    )
+    model=MODEL,
+    messages=[
+        {
+            "role": "system",
+            "content": (
+                "You are a precise programming evaluator. "
+                "Return one valid JSON object only. "
+                "Do not use Markdown code fences. "
+                "Do not include comments or trailing commas."
+            )
+        },
+        {
+            "role": "user",
+            "content": prompt
+        }
+    ],
+    response_format={"type": "json_object"},
+    temperature=0.1,
+    max_completion_tokens=2000
+)
 
     content = (response.choices[0].message.content or "").strip()
 
@@ -106,7 +109,17 @@ Each criterion score must be 0, 1, or 2.
     if start == -1 or end == -1:
         raise ValueError("Evaluator did not return valid JSON.")
 
-    result = json.loads(content[start:end + 1])
+    try:
+        result = json.loads(content[start:end + 1])
+
+    except json.JSONDecodeError as error:
+        print("\n===== INVALID EVALUATOR RESPONSE =====")
+        print(content)
+        print("\n===== END RESPONSE =====")
+
+        raise ValueError(
+            f"AI returned malformed JSON: {error}"
+        )
 
     criterion_results = result.get("criterion_results")
 
