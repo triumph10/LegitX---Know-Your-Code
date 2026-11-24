@@ -6,9 +6,13 @@ from adaptive_learning import (
     choose_next_action,
     create_retry_prompt
 )
+from database import initialize_database, save_evaluation
 
 def main():
 
+    initialize_database()
+    
+    
     print("\n===== LEGITX =====")
     print("Know Your Code. Own Your Skills.")
 
@@ -73,7 +77,16 @@ def main():
             question_data,
             user_answer
         )
+        print("DEBUG: Saving first evaluation...")
 
+        save_evaluation(
+            selected_function["qualified_name"],
+            selected_function["file"],
+            question_data["question"],
+            evaluation
+        )
+
+        print("DEBUG: First evaluation saved!")
         print("\n===== LEGITX EVALUATION =====")
 
         print(
@@ -151,6 +164,13 @@ def main():
                     selected_function,
                     question_data,
                     retry_answer
+                )
+                
+                save_evaluation(
+                selected_function["qualified_name"],
+                selected_function["file"],
+                question_data["question"],
+                retry_evaluation
                 )
 
                 print(
