@@ -2,7 +2,10 @@
 from scanner import scan_project
 from question_generator import generate_question
 from evaluator import evaluate_answer
-
+from adaptive_learning import (
+    choose_next_action,
+    create_retry_prompt
+)
 
 def main():
 
@@ -114,6 +117,66 @@ def main():
 
     except Exception as error:
         print(f"\nLegitX encountered an error: {error}")
+
+
+        # Decide what the user should do next.
+        next_action = choose_next_action(evaluation)
+
+        print("\n===== YOUR NEXT STEP =====")
+        print(next_action["message"])
+
+        if next_action["action"] in ("retry", "practice"):
+
+            retry_prompt = create_retry_prompt(
+                question_data,
+                evaluation
+            )
+
+            print("\n===== FOCUS AREAS =====")
+
+            for gap in next_action["focus_areas"]:
+                print(f"- {gap}")
+
+            print("\n===== RETRY CHALLENGE =====")
+            print(retry_prompt)
+
+            retry_answer = input(
+                "\nTry explaining it again: "
+            ).strip()
+
+            if retry_answer:
+                print("\nEvaluating your improved explanation...")
+
+                retry_evaluation = evaluate_answer(
+                    selected_function,
+                    question_data,
+                    retry_answer
+                )
+
+                print(
+                    f"\nPrevious score: "
+                    f"{evaluation['percentage']}%"
+                )
+
+                print(
+                    f"New score: "
+                    f"{retry_evaluation['percentage']}%"
+                )
+
+                improvement = (
+                    retry_evaluation["percentage"]
+                    - evaluation["percentage"]
+                )
+
+                print(f"Score improvement: {improvement:+}%")
+
+            else:
+                print("\nRetry skipped.")
+
+        elif next_action["action"] == "next":
+            print(
+                "\nYou are ready to explore another function!"
+            )
 
 
 if __name__ == "__main__":
