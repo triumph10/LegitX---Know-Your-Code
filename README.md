@@ -182,26 +182,8 @@ LegitX/
 
 ---
 
-## 🔮 Roadmap
 
-- [ ] Code architecture visualization
-- [ ] Targeted follow-up questions based on past mistakes
-- [ ] Spaced repetition and long-term recommendations
-- [ ] Richer learning analytics
-- [ ] Support for more programming languages
-- [ ] Deeper comprehension challenges (tracing, bug-spotting)
-- [ ] Sandboxed code execution for debugging exercises
 
----
 
-## 🤝 Contributing
-
-Issues and pull requests are welcome. For larger changes, please open an issue first to discuss what you'd like to change.
-
-## 📄 License
-
-Add a license (e.g. MIT) and link it here.
-
----
 
 **LegitX — Don't just write code. Understand it.**

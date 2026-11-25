@@ -1,2 +1,19 @@
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
+venv/
+.venv/
+
+# Local data (keeps data/.gitkeep so the folder still exists)
+data/*.db
+data/*.sqlite3
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
