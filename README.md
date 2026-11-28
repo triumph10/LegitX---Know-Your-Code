@@ -1,4 +1,4 @@
-# 🧠 LegitX — Know Your Code. Own Your Skills.
+# LegitX - Know Your Code. Own Your Skills.
 
 > Passing tests proves your code works. LegitX checks whether **you** understand why.
 
@@ -12,35 +12,35 @@ LegitX is an AI-powered learning tool that scans your Python project, quizzes yo
 
 ## Table of Contents
 
-- [Features](#-features)
-- [Quick Start](#-quick-start)
-- [Usage](#-usage)
-- [How It Works](#-how-it-works)
-- [Understanding Scores](#-understanding-scores)
-- [Privacy and Security](#-privacy-and-security)
-- [Project Structure](#-project-structure)
-- [Tech Stack](#-tech-stack)
-- [Troubleshooting](#-troubleshooting)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
+- [Features](#features)
+- [Quick Start](#quick-start)
+- [Usage](#usage)
+- [How It Works](#how-it-works)
+- [Understanding Scores](#understanding-scores)
+- [Privacy and Security](#privacy-and-security)
+- [Project Structure](#project-structure)
+- [Tech Stack](#tech-stack)
+- [Troubleshooting](#troubleshooting)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
 
 ---
 
-## ✨ Features
+## Features
 
 | | Feature | What it does |
 |---|---|---|
-| 🔍 | **Codebase scanning** | Walks your project and extracts every function with Python's `ast` module |
-| ❓ | **Function-specific questions** | Generates challenges from your actual code, not generic trivia |
-| 📝 | **Rubric-based evaluation** | Scores your explanation against criteria generated for that function |
-| 🎯 | **Knowledge-gap detection** | Highlights concepts and implementation details you missed |
-| 🔁 | **Adaptive retries** | Suggests follow-up practice based on how you did |
-| 📈 | **Progress tracking** | Stores every attempt in SQLite and tracks performance per function |
-| 🖥️ | **Two interfaces** | Streamlit dashboard or a terminal workflow |
+| | **Codebase scanning** | Walks your project and extracts every function with Python's `ast` module |
+| | **Function-specific questions** | Generates challenges from your actual code, not generic trivia |
+| | **Rubric-based evaluation** | Scores your explanation against criteria generated for that function |
+| | **Knowledge-gap detection** | Highlights concepts and implementation details you missed |
+| | **Adaptive retries** | Suggests follow-up practice based on how you did |
+| | **Progress tracking** | Stores every attempt in SQLite and tracks performance per function |
+| | **Two interfaces** | Streamlit dashboard or a terminal workflow |
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 **Prerequisites:** Python 3.9+ and a free [Groq API key](https://console.groq.com/keys).
 
@@ -73,12 +73,12 @@ GROQ_MODEL=openai/gpt-oss-120b
 
 | Variable | Required | Description |
 |---|---|---|
-| `GROQ_API_KEY` | ✅ | Your Groq API key |
-| `GROQ_MODEL` | ❌ | Model used for question generation and evaluation (default shown above) |
+| `GROQ_API_KEY` | Yes | Your Groq API key |
+| `GROQ_MODEL` | No | Model used for question generation and evaluation (default shown above) |
 
 ---
 
-## 🕹️ Usage
+## Usage
 
 ### Dashboard (recommended)
 
@@ -103,7 +103,7 @@ Enter your project path when prompted and follow the on-screen steps.
 
 ---
 
-## 🧩 How It Works
+## How It Works
 
 ```mermaid
 flowchart TD
@@ -119,7 +119,7 @@ flowchart TD
 
 ---
 
-## 📊 Understanding Scores
+## Understanding Scores
 
 Each evaluation returns:
 
@@ -131,7 +131,7 @@ Scores are **learning indicators**, not objective measures of your ability or ma
 
 ---
 
-## 🔒 Privacy and Security
+## Privacy and Security
 
 - **Your code leaves your machine.** Function source code and your answers are sent to the Groq API for question generation and evaluation. Don't scan proprietary or sensitive code unless that's acceptable under your own policies.
 - **Keep your API key private.** Make sure `.env` is in `.gitignore` and never commit it. If a key is ever exposed, revoke it in the Groq console and create a new one.
@@ -139,7 +139,7 @@ Scores are **learning indicators**, not objective measures of your ability or ma
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```text
 LegitX/
@@ -159,7 +159,7 @@ LegitX/
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Technology | Purpose |
 |---|---|
@@ -171,7 +171,7 @@ LegitX/
 
 ---
 
-## 🩹 Troubleshooting
+## Troubleshooting
 
 | Problem | Fix |
 |---|---|
@@ -182,8 +182,4 @@ LegitX/
 
 ---
 
-
-
-
-
-**LegitX — Don't just write code. Understand it.**
+**LegitX - Don't just write code. Understand it.**
